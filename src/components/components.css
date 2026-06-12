@@ -1,0 +1,343 @@
+/* App Layout */
+.app-container {
+  min-height: 100vh;
+  padding: 2rem;
+  position: relative;
+  z-index: 10;
+}
+@media (min-width: 768px) {
+  .app-container { padding: 3rem; }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-full);
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-icon {
+  padding: 0.5rem;
+  background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.settings-btn {
+  padding: 0.5rem;
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.settings-btn:hover {
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+
+.main-content {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.view-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.error-msg {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  border-radius: var(--radius-md);
+  color: #fca5a5;
+  text-align: center;
+  max-width: 32rem;
+  width: 100%;
+}
+
+/* Hero Component */
+.hero-container {
+  text-align: center;
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.hero-title {
+  font-size: 3rem;
+  line-height: 1.1;
+}
+@media (min-width: 768px) {
+  .hero-title { font-size: 4.5rem; }
+}
+
+.hero-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+/* FileUpload Component */
+.upload-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  border: 2px dashed var(--glass-border);
+  cursor: pointer;
+  width: 100%;
+  max-width: 36rem;
+  gap: 1rem;
+  text-align: center;
+}
+
+.upload-area.drag-active {
+  border-color: var(--accent-color);
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.upload-icon-container {
+  position: relative;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+.upload-icon-small {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  color: #a855f7;
+}
+
+.upload-title {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.upload-subtitle {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Loader Component */
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.loader-icon-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-color);
+}
+
+.loader-ring {
+  position: absolute;
+  inset: 0;
+  border: 4px solid var(--glass-bg);
+  border-top-color: var(--accent-color);
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.loader-icon {
+  position: relative;
+  z-index: 2;
+}
+
+.loader-text {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.loader-subtext {
+  color: var(--text-secondary);
+  max-width: 24rem;
+}
+
+/* Dashboard Component */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 768px) {
+  .dashboard-content {
+    grid-template-columns: 1fr 1fr;
+  }
+  .col-span-2 {
+    grid-column: span 2;
+  }
+}
+
+.primary-card {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.dashboard-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.dashboard-big-picture {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.card-header h3 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.icon-badge {
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-badge.green { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+.icon-badge.purple { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+.icon-badge.blue { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.bullet {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.architecture-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding: 1rem;
+}
+
+.arch-icon {
+  color: #c084fc;
+}
+
+.components-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 768px) {
+  .components-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+.component-item {
+  padding: 1.5rem;
+}
+.component-item h4 {
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+.component-item p {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin: 0;
+}
