@@ -1,11 +1,14 @@
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { UploadCloud, FolderOpen } from 'lucide-react';
+import { UploadCloud, FolderOpen, Github, ArrowRight } from 'lucide-react';
+import { fetchGithubRepo } from '../lib/github';
 import './components.css';
 
 const FileUpload = ({ onFilesSelected }) => {
   const fileInputRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [githubUrl, setGithubUrl] = useState('');
+  const [isFetchingGithub, setIsFetchingGithub] = useState(false);
 
   const handleClick = () => {
     fileInputRef.current.click();
@@ -48,6 +51,21 @@ const FileUpload = ({ onFilesSelected }) => {
     }
   };
 
+  const handleGithubSubmit = async (e) => {
+    e.preventDefault();
+    if (!githubUrl.trim()) return;
+    
+    setIsFetchingGithub(true);
+    try {
+      const files = await fetchGithubRepo(githubUrl);
+      onFilesSelected(files);
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      setIsFetchingGithub(false);
+    }
+  };
+
   const processFiles = async (fileList) => {
     const validFiles = [];
     for (let i = 0; i < fileList.length; i++) {
@@ -87,33 +105,64 @@ const FileUpload = ({ onFilesSelected }) => {
   };
 
   return (
-    <motion.div 
-      className={`upload-area glass card ${isDragging ? 'drag-active' : ''}`}
-      initial={{ y: 20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 0.3, duration: 0.5 }}
-      onClick={handleClick}
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-    >
-      <input 
-        type="file" 
-        ref={fileInputRef}
-        onChange={handleFileChange}
-        style={{ display: 'none' }}
-        webkitdirectory="true"
-        directory="true"
-      />
-      <div className="upload-icon-container">
-        <FolderOpen size={48} className="upload-icon" />
-        <UploadCloud size={24} className="upload-icon-small" />
+    <div className="upload-section">
+      {/* GitHub Input */}
+      <motion.form 
+        className="github-form glass card"
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        onSubmit={handleGithubSubmit}
+      >
+        <div className="github-input-wrapper">
+          <Github size={20} className="github-icon" />
+          <input 
+            type="text" 
+            placeholder="Paste a GitHub repository URL..." 
+            value={githubUrl}
+            onChange={(e) => setGithubUrl(e.target.value)}
+            disabled={isFetchingGithub}
+            className="github-input"
+          />
+          <button type="submit" className="btn btn-primary github-submit" disabled={isFetchingGithub || !githubUrl.trim()}>
+            {isFetchingGithub ? "Fetching..." : <ArrowRight size={20} />}
+          </button>
+        </div>
+      </motion.form>
+
+      <div className="upload-divider">
+        <span>OR</span>
       </div>
-      <h3 className="upload-title">Select a Codebase Folder</h3>
-      <p className="upload-subtitle">Click to browse or drag & drop</p>
-    </motion.div>
+
+      {/* Local Folder Upload */}
+      <motion.div 
+        className={`upload-area glass card ${isDragging ? 'drag-active' : ''}`}
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+        onClick={handleClick}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+      >
+        <input 
+          type="file" 
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          style={{ display: 'none' }}
+          webkitdirectory="true"
+          directory="true"
+        />
+        <div className="upload-icon-container">
+          <FolderOpen size={48} className="upload-icon" />
+          <UploadCloud size={24} className="upload-icon-small" />
+        </div>
+        <h3 className="upload-title">Select a Codebase Folder</h3>
+        <p className="upload-subtitle">Click to browse or drag & drop</p>
+      </motion.div>
+    </div>
   );
 };
 

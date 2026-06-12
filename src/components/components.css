@@ -118,7 +118,69 @@
   margin: 0 auto;
 }
 
-/* FileUpload Component */
+/* FileUpload Section */
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 40rem;
+  gap: 1.5rem;
+}
+
+.github-form {
+  width: 100%;
+  padding: 1.5rem;
+}
+
+.github-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.github-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--text-secondary);
+}
+
+.github-input {
+  width: 100%;
+  padding-left: 3rem;
+  padding-right: 4rem;
+  height: 3.5rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-primary);
+}
+
+.github-submit {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0.5rem 1rem;
+  height: 2.5rem;
+}
+
+.upload-divider {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.upload-divider::before,
+.upload-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--glass-border);
+  margin: 0 1rem;
+}
+
 .upload-area {
   display: flex;
   flex-direction: column;
@@ -128,7 +190,6 @@
   border: 2px dashed var(--glass-border);
   cursor: pointer;
   width: 100%;
-  max-width: 36rem;
   gap: 1rem;
   text-align: center;
 }
