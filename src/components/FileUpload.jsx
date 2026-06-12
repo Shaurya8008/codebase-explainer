@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { UploadCloud, FolderOpen, Github, ArrowRight } from 'lucide-react';
+import { UploadCloud, FolderOpen, GitBranch, ArrowRight } from 'lucide-react';
 import { fetchGithubRepo } from '../lib/github';
 import './components.css';
 
@@ -115,7 +115,7 @@ const FileUpload = ({ onFilesSelected }) => {
         onSubmit={handleGithubSubmit}
       >
         <div className="github-input-wrapper">
-          <Github size={20} className="github-icon" />
+          <GitBranch size={20} className="github-icon" />
           <input 
             type="text" 
             placeholder="Paste a GitHub repository URL..." 
