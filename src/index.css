@@ -10,9 +10,10 @@
   --accent-glow: rgba(99, 102, 241, 0.5);
   --accent-color-hover: #4f46e5;
 
-  --border-color: rgba(255, 255, 255, 0.1);
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(20, 22, 28, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-glow: rgba(168, 85, 247, 0.15);
   
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -38,29 +39,43 @@ body {
 }
 
 /* Dynamic background gradients */
-body::before, body::after {
+body::before, body::after, .bg-orb-3 {
   content: "";
   position: fixed;
-  width: 50vw;
-  height: 50vw;
   border-radius: 50%;
-  filter: blur(100px);
+  filter: blur(120px);
   z-index: -1;
-  animation: float 20s infinite ease-in-out alternate;
-  opacity: 0.15;
+  opacity: 0.25;
 }
 
 body::before {
-  top: -10%;
+  width: 50vw;
+  height: 50vw;
+  top: -20%;
   left: -10%;
-  background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+  background: radial-gradient(circle, #6366f1 0%, transparent 60%);
+  animation: float 25s infinite ease-in-out alternate;
 }
 
 body::after {
+  width: 45vw;
+  height: 45vw;
   bottom: -10%;
   right: -10%;
-  background: radial-gradient(circle, #a855f7 0%, transparent 70%);
+  background: radial-gradient(circle, #a855f7 0%, transparent 60%);
+  animation: float 20s infinite ease-in-out alternate-reverse;
+  animation-delay: -5s;
+}
+
+.bg-orb-3 {
+  width: 30vw;
+  height: 30vw;
+  top: 40%;
+  left: 40%;
+  background: radial-gradient(circle, #ec4899 0%, transparent 60%);
+  animation: float 30s infinite ease-in-out alternate;
   animation-delay: -10s;
+  pointer-events: none;
 }
 
 @keyframes float {
@@ -72,16 +87,21 @@ body::after {
 /* Glassmorphism Utilities */
 .glass {
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--glass-border);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .card {
   border-radius: var(--radius-lg);
   padding: 2rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 0 20px var(--glass-glow);
 }
 
 /* Typography Utilities */

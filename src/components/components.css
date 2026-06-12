@@ -187,16 +187,24 @@
   align-items: center;
   justify-content: center;
   padding: 4rem 2rem;
-  border: 2px dashed var(--glass-border);
+  border: 2px dashed rgba(255, 255, 255, 0.15);
   cursor: pointer;
   width: 100%;
   gap: 1rem;
   text-align: center;
+  transition: all 0.3s ease;
+}
+
+.upload-area:hover {
+  border-color: rgba(168, 85, 247, 0.4);
+  background: rgba(168, 85, 247, 0.05);
 }
 
 .upload-area.drag-active {
   border-color: var(--accent-color);
   background: rgba(99, 102, 241, 0.1);
+  transform: scale(1.02);
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
 }
 
 .upload-icon-container {
@@ -295,7 +303,27 @@
 
 .primary-card {
   background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
-  border: 1px solid rgba(168, 85, 247, 0.2);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.primary-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  transform: skewX(-20deg);
+  animation: shine 8s infinite;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  20% { left: 200%; }
+  100% { left: 200%; }
 }
 
 .dashboard-title {
@@ -391,11 +419,33 @@
 
 .component-item {
   padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
 }
+
+.component-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
 .component-item h4 {
   font-size: 1.125rem;
   margin-bottom: 0.5rem;
   color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.component-item h4::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #c084fc;
+  border-radius: 50%;
 }
 .component-item p {
   color: var(--text-secondary);
